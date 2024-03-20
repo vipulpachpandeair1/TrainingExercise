@@ -1,0 +1,294 @@
+{
+	"info": {
+		"_postman_id": "bde3b899-97ed-4953-8bab-c2bb4ffe34e3",
+		"name": "RestAPIExercise",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33506253"
+	},
+	"item": [
+		{
+			"name": "GetMethod",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"GetMethod Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    console.log(\"GetMethod Status code is 200\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains Success status\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Success\");\r",
+							"    console.log(\"Body contains Success status\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status, Id, and Name is as Expected\", function () {\r",
+							"    var x = pm.response.json();\r",
+							"    pm.expect(x.status).to.eql(\"success\");\r",
+							"    pm.expect(x.data.id).to.eql(20);\r",
+							"    pm.expect(x.data.employee_name).to.eql(\"Dai Rios\");\r",
+							"    console.log(\"Status is: \"+x.status+\"\\nEmployee_Id is: \"+x.data.id+\"\\nEmployee_Name is:\"+x.data.employee_name);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\"==========================Execution Started for GetMethod==========================\")"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/employee/20",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"20"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostMethod",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"PostMethod Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    console.log(\"PostMethod Status code is 200\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains Success status\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Successfully! Record has been added.\");\r",
+							"    console.log(\"Body contains - Successfully! Record has been added.\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status and Employee_Id is as Expected\", function () {\r",
+							"    var x = pm.response.json();\r",
+							"    pm.expect(x.status).to.eql(\"success\");\r",
+							"    pm.expect(x.data.name).to.eql(\"Vipul Pachpande\");\r",
+							"    console.log(\"Status is: \"+x.status+\"\\nCreated Employee_Id is: \"+x.data.id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"    console.log(\"Content-Type is present\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\"==========================Execution Started for PostMethod==========================\")"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Vipul Pachpande\",\r\n    \"salary\": 123456,\r\n    \"age\": 32\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/create",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutMethod",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\"==========================Execution Started for PutMethod==========================\")"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"PutMethod Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    console.log(\"PutMethod Status code is 200\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains Success status\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Successfully! Record has been updated.\");\r",
+							"    console.log(\"Body contains - Successfully! Record has been updated.\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present and matched\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"    console.log(\"Content-Type is present\");\r",
+							"\r",
+							"    pm.response.to.have.header(\"Content-Type\",\"application/json\");\r",
+							"    console.log(\"Content-Type is matched\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 3000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Vipul Pachpande\",\r\n    \"salary\": 123456,\r\n    \"age\": 32\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/update/12",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"update",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteRequest",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\"==========================Execution Started for DeleteMethod==========================\")"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"DeleteMethod Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    console.log(\"DeleteMethod Status code is 200\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body contains Success status\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Successfully! Record has been deleted\");\r",
+							"    console.log(\"Body contains - Successfully! Record has been deleted\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Header contains all given fields\", function () {\r",
+							"    pm.response.to.have.header(\"Server\",\"Apache\");\r",
+							"    console.log(\"Apache Server is present\");\r",
+							"\r",
+							"    pm.response.to.have.header(\"Content-Encoding\",\"gzip\");\r",
+							"    console.log(\"Content-Encoding is in gzip format\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 2000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/delete/20",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"delete",
+						"20"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
